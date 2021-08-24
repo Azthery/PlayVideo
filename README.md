@@ -226,9 +226,9 @@ Para inicializar y configurar correctamente tu proyecto sigue los siguientes pas
 1. `mkdir <NombreDeLaCarpeta>` para crea tu carpeta
 2. `cd <NombreDeLaCarpeta>` entrar en ella
 3. `git init` Inicializar **git**
-4. `npm init -y` inicializar npm automaticamente
+4. `npm init -y` inicializar npm automáticamente
 
-Generar una extructura la cual es un estandar la cual es tal que
+Generar una estructura la cual es un estándar la cual es tal que
 
 ![ejemplo](./apuntes/estandar_react.jpg)
 
@@ -248,4 +248,60 @@ Notaremos en nuestro archivo `package.json`, posee unas nuevas dependencias:
     "react-dom": "^17.0.2"
   }
 ```
+_____________________________________________________________________________________________________
+
+## Configurando y dando Compatibilidad con **Babel**
+
+Crearemos un componente, llamado `HelloWorld.jsx` en `./src/componets/HelloWorld.jsx`, el cual es:
+```jsx
+import React from 'react';
+
+const HelloWorld = () => {
+    <h1>Hola Mundo!</h1>
+};
+
+export default HelloWorld;
+```
+
+Ahora configuraremos nuestro punto de entrada, el archivo `index.js` en `./src/index.js`:
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import HelloWorld from "./componets/HelloWorld";
+
+ReactDOM.render(<HelloWorld />, document.getElementById(app));
+```
+Se renderizara en el DOM nuestro componente `HelloWorld.jsx`.
+
+Para que sea desplegada la app necesitaremos un archivo html, es decir nuestro archivo `index.html` ubicado en `./public/index.html`
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Play Video</title>
+</head>
+<body>
+    <div class="app">
+        
+    </div>
+</body>
+</html>
+```
+
+Finalmente una vez hayamos **configurado correctamente** nuestra base de la app, instalaremos **babel**, con el **comando**:
+```zsh
+npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-loader
+```
+
+Para **configurar babel**, debemos de **crear** un nuevo archivo llamado `.babelrc`, el cual ir en la carpeta raiz de proyecto, este archivo contiene:
+```json
+{
+    "presets": [
+        "@babel/preset-env",
+        "@babel/preset-react"
+    ]
+}
+```
+
 _____________________________________________________________________________________________________
