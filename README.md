@@ -43,28 +43,49 @@ ________________________________________________________________________________
 
 ## Compomentes
 
-Los elementos en React tienen la caracteristica de ser independientes y reeutilizables.
-Estas son del tipo funcional y de clase, ambas devuelve un `elemento react`, esta opcionalmente reciben un parametro `prop` del cual se trata de un `object`, por convenio se usar **_CamelCase_**.
-Estas son:
+Los componentes son una caracteristica de React que nos permite modular, idependizar y da lugar a la reeutilizacion del codigo.
+Esto nos permite tener una vision mas limpiar y general del codigo (cuando se lleva a cabo buenas practicas).
+De estos en react tenemos de 3 tipos, los cuales son:
 
-- **Componentes funcionales**: 
-Se llaman "funcionales" por que literalmente **son una función** de `js`
+- **Stateless** o **Componentes funcionales**: 
+Se llaman "funcionales" por que literalmente **son una función** de JavaScript, devuelven un **elemento react**, contienen logica y reciben como parametro un objeto "prop"
 ```jsx
-function Welcome(props) {
-  return <h1>Hello, {props.name}</h1>;
-}
+const Stateless = (props) =>{
+  const name = props.name;
+  const procentage = (props.amount / props.amountTotal) * 100;
+    return(
+        <h1>There is {procentage}% {name}</h1>
+    );
+};
 ```
 
-
-- Componentes de clase: Tienen propiedades y ciclo de vida
-Estas utilizar una clase de ES6 para definir un componente
+- **Stateful** o **Componentes de clase**:
+Estos estan compuesto por una clase de JavaScript, posee las misma caracteristica que los **stateless**, sin embargo estos tambien poseen estado `state`, ciclo de vida y son capaces de manejar eventos.
 ```jsx
-class Welcome extends React.Component {
-  render() {
-    return <h1>Hello, {this.props.name}</h1>;
+import React from 'react';
+
+class Stateful extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      hello: 'Hola Mundo'
+    }
+  }
+  render(){
+    return(
+      <h1>{this.state.hello}</h1>
+    )
   }
 }
 ```
+
+- **Presentacionales**:
+Estos son los mas basicos de todos, no poseen logica, estados, ni propiedades, es solamente una funcion simple que retorna un elemento.
+```jsx
+const Presentacional = ()=> <h1>Hola mundo tres veces</h1>;
+```
+
+>**Los props jamas deben de ser modificados**
 
 _____________________________________________________________________________________________________
 
@@ -97,5 +118,7 @@ Recapitulando:
 4. **React DOM actualiza** eficientemente el DOM para que coincida con `<h1>Hello, Sara</h1>`.
 
 
->_Apuntes extraidos de documentacion de React_
+Los componentes pueden ser "llamados" desde otros componentes, asi anillandolos como unas muñecas rusas _mamushka_, formando codigo el cual se puede reciclar facilmente.
+
+>_Apuntes inspirados de la documentacion de React_
 _____________________________________________________________________________________________________
