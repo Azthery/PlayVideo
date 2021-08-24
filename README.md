@@ -218,3 +218,34 @@ handleClick() {
 ```
 
 _____________________________________________________________________________________________________
+
+## **Instalación** y **configuración** de entorno
+
+Para inicializar y configurar correctamente tu proyecto sigue los siguientes pasos en consola:
+
+1. `mkdir <NombreDeLaCarpeta>` para crea tu carpeta
+2. `cd <NombreDeLaCarpeta>` entrar en ella
+3. `git init` Inicializar **git**
+4. `npm init -y` inicializar npm automaticamente
+
+Generar una extructura la cual es un estandar la cual es tal que
+
+![ejemplo](./apuntes/estandar_react.jpg)
+
+Procederemos a **instalar** **React**
+```zsh
+npm install react react-dom
+```
+
+Este nos generara unos archivos en la carpeta, los cuales nos quedaran tal que asi:
+
+![ejemplo](./apuntes/estandar_react2.jpg)
+
+Notaremos en nuestro archivo `package.json`, posee unas nuevas dependencias:
+```json
+"dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+```
+_____________________________________________________________________________________________________
