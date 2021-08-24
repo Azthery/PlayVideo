@@ -305,3 +305,73 @@ Para **configurar babel**, debemos de **crear** un nuevo archivo llamado `.babel
 ```
 
 _____________________________________________________________________________________________________
+
+## **Webpack**: Empaquetando nuestros módulos
+
+Webpack es una herramienta que nos ayudara preparar nuestro proyecto, para enviarlo a producción o entorno de desarrollo local.
+Lo que hace webpack es como si empaquetada de manera optimizada todo nuestro proyecto y los deja listo para enviar.
+
+Para instalarlo ejecutamos
+```zsh
+npm install webpack webpack-cli html-webpack-plugin html-loader  --save-dev
+```
+
+Una vez instalado, lo configuraremos con un archivo `webpack.config.js` que ubicaremos en la carpeta **raiz**, en este agregaremos:
+```js
+const path = require('path');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js'
+    },
+    resolve: {
+        extensions: ['.js', 'jsx']
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_module/,
+                use: {
+                    loader: "babel-loader"
+                }
+            },
+            {
+                test: /\.hmtl$/,
+                use: [
+                    {
+                        loader: 'html-loader'
+                    }
+                ]
+            }
+        ]
+    },
+    plugins: [
+        new HtmlWebPackPlugin({
+            template: './public/index.html',
+            filename: './index.html'
+        })
+    ]
+}
+```
+
+Una vez "escrito" todo este largisimo codigo _giño giño_, nos moveremos al archivo `package.json`, **agregaremos** un `script`, tal que:
+```json
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production"
+  }
+```
+
+Finalmente una vez hecho todo esto podremos irnos a nuestro proyecto en consola y **ejecutaremos**:
+```zsh
+npm run build
+```
+
+Con esto se creara una carpeta llamada dist, que tendra todo nuestro codigo listo para se desplegado a produccion.
+
+_____________________________________________________________________________________________________
+
