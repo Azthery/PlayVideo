@@ -319,43 +319,41 @@ npm install webpack webpack-cli html-webpack-plugin html-loader  --save-dev
 Una vez instalado, lo configuraremos con un archivo `webpack.config.js` que ubicaremos en la carpeta **raiz**, en este agregaremos:
 ```js
 const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
-    },
-    resolve: {
-        extensions: ['.js', 'jsx']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_module/,
-                use: {
-                    loader: "babel-loader"
-                }
-            },
-            {
-                test: /\.hmtl$/,
-                use: [
-                    {
-                        loader: 'html-loader'
-                    }
-                ]
-            }
-        ]
-    },
-    plugins: [
-        new HtmlWebPackPlugin({
-            template: './public/index.html',
-            filename: './index.html'
-        })
-    ]
-}
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: [/node_modules/, /apuntes/],
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+      {
+        test: /\.html$/,
+        use: {
+          loader: 'html-loader',
+        },
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      filename: './index.html',
+    }),
+  ],
+};
 ```
 
 Una vez "escrito" todo este largisimo codigo _giño giño_, nos moveremos al archivo `package.json`, **agregaremos** un `script`, tal que:
@@ -375,3 +373,18 @@ Con esto se creara una carpeta llamada dist, que tendra todo nuestro codigo list
 
 _____________________________________________________________________________________________________
 
+## **Webpack Dev Server**: Reporte de errores y Cambios en tiempo real
+
+Una gran ayuda es por **probar** lo que vamos construyendo, para esto usaremos **Webpack Dev Server**
+
+Instalaremos esto con:
+```zsh
+npm install webpack-dev-server@3.11.2 -D
+```
+
+Ahora solo debemos **crear** un `scrip` en nuestro archivo `package.json`
+```json
+"scripts": {
+    "start": "webpack serve --mode development --env development"
+  }
+```
