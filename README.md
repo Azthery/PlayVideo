@@ -320,6 +320,7 @@ Una vez instalado, lo configuraremos con un archivo `webpack.config.js` que ubic
 ```js
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -344,7 +345,7 @@ module.exports = {
         use: {
           loader: 'html-loader',
         },
-      },
+      }
     ],
   },
   plugins: [
@@ -353,6 +354,13 @@ module.exports = {
       filename: './index.html',
     }),
   ],
+  devServer: {
+      contentBase: path.join(__dirname, 'dist'),
+      compress: true,
+      historyApiFallback: true,
+      port: 3006,
+      open: true
+  }
 };
 ```
 
@@ -388,3 +396,109 @@ Ahora solo debemos **crear** un `scrip` en nuestro archivo `package.json`
     "start": "webpack serve --mode development --env development"
   }
 ```
+_____________________________________________________________________________________________________
+
+## Preprocesador **SASS**
+
+`sass` nos permite trabajar con `css` y añadile unas nuevas sintaxis, que hara mas agradable trabajar con `css`.
+
+Para **instalar** `sass`
+```zsh
+npm install mini-css-extract-plugin css-loader node-sass sass-loader -D
+```
+Una vez instalado este paquete, lo agregaremos al `webpack.config.js`, lo agregaremos como una nueva regla en `rules: []`, importart el plugin yagregar el plugin:
+```js
+{
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  module:{
+    rules:[
+      {
+      test: /\.(s*)css$/,
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader
+        },
+        'css-loader',
+        'sass-loader'
+        ]
+      }
+    ]
+  },
+  plugins :[
+    new MiniCssExtractPlugin({
+      filename: 'assets/[name].css'
+    })
+  ]
+}
+```
+
+Cosa que todo nustro archivo deba de verse tal que:
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: [/node_modules/, /apuntes/],
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+      {
+        test: /\.html$/,
+        use: {
+          loader: 'html-loader',
+        },
+      },
+      {
+        test: /\.(s*)css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          'css-loader',
+          'sass-loader'
+        ]
+      }
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      filename: './index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'assets/[name].css'
+    })
+  ],
+  devServer: {
+      contentBase: path.join(__dirname, 'dist'),
+      compress: true,
+      historyApiFallback: true,
+      port: 3006,
+      open: true
+  }
+};
+```
+
+Ahora debemos de crear la carpeta llamada **assets** en la cual dentro crearemos otra llamada **styles** , tal que `./src/assets/styles` en donde **guardaremos** nuestros archivos `.sass`.
+
+>**assets** sera la carpeta donde guardaremos todos nuestros recursos visuales
+
+dentro de **styles** crearemos un archivo llamado **App.scss**, tal que `./src/assets/styles/App.sccs`
+
+_____________________________________________________________________________________________________
