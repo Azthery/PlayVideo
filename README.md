@@ -502,3 +502,24 @@ Ahora debemos de crear la carpeta llamada **assets** en la cual dentro crearemos
 dentro de **styles** crearemos un archivo llamado **App.scss**, tal que `./src/assets/styles/App.sccs`
 
 _____________________________________________________________________________________________________
+
+## **ESlint**
+
+Eslint es una herramienta para evitar errores y tener buenas practicas.
+
+Para instalarlo ejecutaremos en consola
+```zsh
+npm install eslint babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y -D
+```
+
+Luego de esto crear un archivo en la raiz, con el nombre de `.eslintrc`, y en nuestro caso te recomendamos usar la configuración que encontraras en [aqui](https://gist.github.com/gndx/60ae8b1807263e3a55f790ed17c4c57a).
+
+## **gitignore**
+
+Generalmente en nuestro proyecto tenemos archivos que **no** querramos agregar a git, ya que son muy pesados, por seguridad, etc.
+Para esto existe `.gitignore`, el cual le dice a git que archivos debe **ignorar**.
+
+El uso de git ignore es simple, solo en la **carpeta raiz** crea un archivo `.gitignore`, y dentro agrega por linea el repositorio, archivo o extensiones que quiere que git ignore, en este proyecto recomendamos usar [esta configuración](https://gist.github.com/gndx/747a8913d12e96ff8374e2125efde544).
+
+_____________________________________________________________________________________________________
+
