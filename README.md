@@ -523,3 +523,66 @@ El uso de git ignore es simple, solo en la **carpeta raiz** crea un archivo `.gi
 
 _____________________________________________________________________________________________________
 
+## **Dando forma a nuestra app en React**
+
+En nuestra carpeta **src**, dentro hay **dos carpetas** que destacan **components** y **container**.
+- **Components**: Aqui es donde despositaremos nuestro componentes. 
+- **Container**: En esta carpeta guardaremos nuestros containers, estos son componentes que dentro desplegan mas componentes, esto es para llevar un mayor orden de una estructura mas macro.
+
+En nuestra carpeta **container** agregaremos un nuevo componente denominado **App.jsx** este sera nuestro container **principal**, donde desplegaremos todos los demas container y componentes.
+
+Mostraremos esto en un ejemplo con pasos:
+
+1. Crearemos un componente, en este caso sera un `header`, en `./src/components/Header.jsx` tal que:
+```jsx
+import React from 'react';
+
+const Header = () =>{
+    return(
+        <header className="header">
+            <img className="header__img" src="../assets/logo.png" alt="Play Video"/>
+            <div className="header__menu">
+                <div className="header__menu--profile">
+                    <img src="../assets/user-icon.png" alt=""/>
+                    <p>Perfil</p>
+                </div>
+                <ul>
+                    <li><a href="/">Cuenta</a></li>
+                    <li><a href="/">Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </header>
+    )
+};
+
+export default Header;
+```
+
+2. Crearemos nuestro archivo **App.jsx** en `./src/container/App.jsx`, en el cual integraremos el compuesto anterior que sera tal que:
+```jsx
+import React from 'react';
+
+import Header from '../components/Header';
+
+const App = () => {
+    return(
+        <div className="app">
+            <Header />
+        </div>
+    )
+}
+
+export default App;
+```
+
+3. Finalmente en **index.js** renderizaremos la **App.jsx**:
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import App from './container/App.jsx';
+
+ReactDOM.render(<App />, document.getElementById('app'));
+```
+
+_____________________________________________________________________________________________________
+
