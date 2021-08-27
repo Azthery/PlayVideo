@@ -43,7 +43,7 @@
   }
   
   .carousel-item__details--img {
-    width: 20px;
+    width: 30px;
   }
   
   .carousel-item:hover .carousel-item__details {
@@ -53,10 +53,11 @@
   .carousel-item__details--title {
     color: white;
     margin: 5px 0px 0px 0px;
+    font-size: 15px;
   }
   
   .carousel-item__details--subtitle {
     color: white;
-    font-size: 8px;
+    font-size: 10px;
     margin: 3px 0px;
   }
