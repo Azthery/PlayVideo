@@ -586,3 +586,13 @@ ReactDOM.render(<App />, document.getElementById('app'));
 
 _____________________________________________________________________________________________________
 
+## Estilos en componentes
+
+Añadir estilos es realmente facil, solo debes ir al componente e importar
+Ejemplo:
+```jsx
+import '../assets/styles/App.scss';
+```
+
+_____________________________________________________________________________________________________
+
