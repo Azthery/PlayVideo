@@ -1,6 +1,6 @@
 import React from 'react';
-
 import '../assets/styles/components/Header.scss';
+import userIcon from '../assets/static/user-icon.png'
 
 const Header = () =>(
     <header className="header">
@@ -10,7 +10,7 @@ const Header = () =>(
         </div>
         <div className="header__menu">
             <div className="header__menu--profile">
-            <img src="https://img.icons8.com/material-sharp/60/ffffff/user-male-circle.png"/>
+            <img src={userIcon}/>
                 <p>Perfil</p>
             </div>
             <ul>

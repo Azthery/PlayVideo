@@ -2,6 +2,8 @@
 
 Repositorio para el uso didactico en el desarrollo del curso Practico de React JS, junto con el proyecto _"PlayVideo"_ y apuntes del curso ya nombrado.
 
+**Proyecto desplegado:** [https://azthery.github.io/PlayVideo/dist/index.html](https://azthery.github.io/PlayVideo/dist/index.html)
+
 ## **Creando una aplicación con Create React App**
 
 React es una libreria de **JavaScript** para **crear interfaces de usuario**, esta podremos integrarla manualmente para crear nuestra app, pero existe una forma mas **sencilla**, eso es con **Create React App**, que nos ahorrara muchos pasos.
