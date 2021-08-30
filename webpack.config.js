@@ -51,10 +51,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: './index.html',
+      favicon:  './src/assets/static/play-video.png',
     }),
     new MiniCssExtractPlugin({
       filename: 'assets/[name].css'
-    })
+    }),
   ],
   devServer: {
       contentBase: path.join(__dirname, 'dist'),

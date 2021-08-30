@@ -1,6 +1,6 @@
 import React from 'react';
 import '../assets/styles/components/Search.scss';
-import searchIcon from '../assets/static/icons8-search.png';
+import searchIcon from '../assets/static/search-icon.png';
 
 const Search = () => (
     <section className="main">
