@@ -588,7 +588,7 @@ ReactDOM.render(<App />, document.getElementById('app'));
 
 _____________________________________________________________________________________________________
 
-## Estilos en componentes
+## **Estilos en componentes, integrando SASS (.scss)**
 
 Añadir estilos es realmente facil, solo debes ir al componente e importar
 Ejemplo:
@@ -598,3 +598,59 @@ import '../assets/styles/App.scss';
 
 _____________________________________________________________________________________________________
 
+## **Trabajando con SASS (.scss)**
+
+SASS es un preprocesador de CSS, en palabras simples SASS nos otorga mas funcionalidades a css, las cuales nos ayudara a en gran medida en nuestro desaroollo.
+
+- **Variables**:
+Nos permite guardar variables con valores para sccs.
+```sccs
+$color-font: red;
+
+body{
+    color: $color-font;
+}
+```
+
+- **Mixin y include**:
+**@
+mixin** es una variables que guardan un grupo de propiedades listas, las cuales se incluyen con **@include** en alguna clase, etiqueta o id.
+```sccs
+@mixin list-items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin horizontal-list {
+  @include list-items;
+```
+
+- **Import**
+**@import** nos permite importar el contenido de un archivo externo de .sccs, es decir, de un archivo vars.sccs hacia un `index.sccs`
+```sccs
+// vars.sccs
+code {
+  font-family: 'Source Code Pro', Helvetica, Arial;
+  border-radius: 4px;
+}
+```
+
+```sccs
+// index.sccs
+@import "./vars.sccs";
+```
+
+- **Extend**
+**@extend** Nos permite extender nuestro estilos a otra clase, id o etiquetas.
+```sccs
+.font{
+font: sans;
+color: white;
+}
+.title{
+@extend .font;
+font-size: large;
+}
+
+________________________________________________________
