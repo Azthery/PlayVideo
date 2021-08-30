@@ -703,8 +703,12 @@ React Hooks nos permite agregar estado y ciclo de vida a nuestros componentes cr
 
 >Hooks esta disponible a partir de la versión 16.8
 
+Para hacer uso de las funcionalidad que vamos a ver a continuacion debemos de **importarlas**:
+```jsx
+import {useState, useEffect} from 'react';
+```
 
-### - **useState**: Maneja estados, es decir con el podemos darle el **estado** inicial por defecto, o que querramos a nuestro componente.
+- ### **useState**: Maneja estados, es decir con el podemos darle el **estado** inicial por defecto, o que querramos a nuestro componente.
 Esta en si es una **funcion** donde su **primer parametro** es el **valor de nuestro estado**, y el **segundo parametro** es una **funcion que nos permitira actualzar** este valor, esto quiere decir que el segundo parametro lo usaremos con **userEffect**.
 ```jsx
 const [ videos, setVideos ] = useState([]);
@@ -713,8 +717,13 @@ const [ videos, setVideos ] = useState([]);
   1. `videos`, nombre de la **variable** que contiene el **estado**.
   2. `setVideos`, **función** que nos permite **modificar** el **estado**.
 
+> Sin embargo en nuestra app usaremos
+>```jsx
+>   const [videos, setVideos] = useState({ mylist: [], trends: [], originals: [] });
+>```
+>Para evitar errores
 
-### - **userEffect**:
+- ### **userEffect**:
 Hacer **trasmisiones**, esto quiere decir que este hook podemos **actualizar** el estado definido en **UserState**.
 userEffect recibe como **primer parametro** un **función** donde ira la logica, y como **segundo parametro** es una **array** donde podemos especificar que propiedades deben cambiar para que React vuelva a llamar nuestro código, si no enviamos este parametro por defecto se ejecutara cada vez que React se actualice, enviarle un **array vacio** hara que se ejecute solo al montar y desmontar el componente.
 ```jsx
@@ -725,8 +734,40 @@ useEffect(() => {
     }, []);
 ```
 <u>**Parametros**</u>:
-1. `() => {}, una funcion anonima.
+1. `( ) => { }`, una funcion anonima.
 2. `[]`, una array vacia que hara que el codigo solo se actualce al montar y ser desmontado.
+
+____________________________________________________________________________
+
+## **Conectando la información de la API**
+
+A continuacion haremos uso de de la información de la API sobre nuestra app, integrando esos datos a nuestros componentes.
+
+Hare que la categoria `Mi lista` se desplegue cuando tengamos contenido en la misma, en caso contrario no se desplegara.
+```jsx
+{videos.myList?.length > 0 &&
+  <Categories title="Mi lista">
+      <Carousel>
+          <CarouselItem />
+      </Carousel>
+  </Categories>
+}
+```
+Si ponemos atencion tenemos un `?` en `videos.myList?`, que significa esto?
+Este es un un pequeño `if`, preguntara si esta propiedad **existe**.
+Y el elemento `&&` conectara con el elemento a desplegar
+
+Ahora desplegaremos cada uno de los elementos de `Tendencias`, de la siguiente manera
+```jsx
+<Categories title="Tendencias">
+    <Carousel>
+        {videos.trends.map(item =>
+            <CarouselItem key={item.id} {...item}/>
+            )}
+    </Carousel>
+</Categories>
+```
+En donde podremos iterar cada uno de los elementos de `videos.trends` el cual se trata de un array, y a la vez entregandole los datos a `<CarouselItem/>`, los cuales llegaran como argumento en el `prop` al componente.
 
 ____________________________________________________________________________
 

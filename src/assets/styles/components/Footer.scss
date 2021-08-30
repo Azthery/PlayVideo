@@ -2,7 +2,7 @@
     align-items: center;
     background: #1a1a1a4d;
     display: flex;
-    height: 50px;
+    height: 80px;
     width: 100%;
   }
   
@@ -10,7 +10,7 @@
     color: white;
     cursor: pointer;
     font-size: 14px;
-    padding-left: 30px;
+    padding: 5px 30px 5px 30px;
     text-decoration: none;
 }
 
@@ -18,9 +18,3 @@
     text-decoration: underline;
 }
 
-@media only screen and (max-width: 600px) {
-    .footer {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-}
