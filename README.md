@@ -400,7 +400,7 @@ Ahora solo debemos **crear** un `scrip` en nuestro archivo `package.json`
 ```
 _____________________________________________________________________________________________________
 
-## Preprocesador **SASS**
+## Añadiendo preprocesador **SASS** a **WebPack**
 
 `sass` nos permite trabajar con `css` y añadile unas nuevas sintaxis, que hara mas agradable trabajar con `css`.
 
@@ -588,6 +588,28 @@ ReactDOM.render(<App />, document.getElementById('app'));
 
 _____________________________________________________________________________________________________
 
+## **Añadiendo imágenes con Webpack**
+
+Para trabajar con imagenes en Webpack, debemos de agregale una nueva regla en `webpack.config.js`
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(png|gif|jpg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: { name: 'assets/[hash].[ext]' },
+          }
+        ],
+      },
+  }
+}
+```
+    
+_____________________________________________________________________________________________________
+
 ## **Estilos en componentes, integrando SASS (.scss)**
 
 Añadir estilos es realmente facil, solo debes ir al componente e importar
@@ -652,5 +674,59 @@ color: white;
 @extend .font;
 font-size: large;
 }
-
+```
 ________________________________________________________
+
+## **Creando una Fake API con json-server**
+
+`json-server` es un componente, que simula que es una api real de forma local, es decir despliega un archivo `.json` en nuestro `localhost`
+
+Para ello debemos de **instalar** json-server
+```zsh
+sudo npm install json-server -g
+```
+
+Ahora podremos ejecutar un archivo `json` como si fuera de una api, con:
+```zsh
+json-server <archivoJson.json>
+```
+o en **Windows 10** con:
+```zsh
+npx json-server --watch <archivoJson.json>
+```
+
+____________________________________________________________________________
+
+## **React Hooks**: **useEffect** y **useState**
+
+React Hooks nos permite agregar estado y ciclo de vida a nuestros componentes creados como funciones
+
+>Hooks esta disponible a partir de la versión 16.8
+
+
+### - **useState**: Maneja estados, es decir con el podemos darle el **estado** inicial por defecto, o que querramos a nuestro componente.
+Esta en si es una **funcion** donde su **primer parametro** es el **valor de nuestro estado**, y el **segundo parametro** es una **funcion que nos permitira actualzar** este valor, esto quiere decir que el segundo parametro lo usaremos con **userEffect**.
+```jsx
+const [ videos, setVideos ] = useState([]);
+```
+<u>**Parametros**</u>:
+  1. `videos`, nombre de la **variable** que contiene el **estado**.
+  2. `setVideos`, **función** que nos permite **modificar** el **estado**.
+
+
+### - **userEffect**:
+Hacer **trasmisiones**, esto quiere decir que este hook podemos **actualizar** el estado definido en **UserState**.
+userEffect recibe como **primer parametro** un **función** donde ira la logica, y como **segundo parametro** es una **array** donde podemos especificar que propiedades deben cambiar para que React vuelva a llamar nuestro código, si no enviamos este parametro por defecto se ejecutara cada vez que React se actualice, enviarle un **array vacio** hara que se ejecute solo al montar y desmontar el componente.
+```jsx
+useEffect(() => {
+        fetch(API)
+            .then(response => response.json())
+            .then(data => setVideos(data));
+    }, []);
+```
+<u>**Parametros**</u>:
+1. `() => {}, una funcion anonima.
+2. `[]`, una array vacia que hara que el codigo solo se actualce al montar y ser desmontado.
+
+____________________________________________________________________________
+
