@@ -1,49 +1,38 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 
+import '../assets/styles/App.scss';
+
 import Header from '../components/Header';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
 import Footer from '../components/Footer';
-import useInitialState from '../hooks/useInitialState';
-import '../assets/styles/App.scss';
+import UpperCaseFirstCase from '../components/UpperCaseFirstCase';
 
-const API = 'http://localhost:3000/initalState';
+import useInitialState from '../hooks/useInitialState';
+
+const API = 'https://raw.githubusercontent.com/Azthery/PlayVideo/master/initalState.json';
 
 const App = () => {
-    const initialState = useInitialState(API);
+    const [videos, categories] = useInitialState(API);
     return(
         <div className="app">
             <Header />
             <Search />
 
-            {initialState.myList?.length > 0 &&
-                <Categories title="Mi lista">
-                    <Carousel>
-                    {initialState.trends.map(item =>
-                        <CarouselItem key={item.id} {...item}/>
-                        )}
-                </Carousel>
-                </Categories>
-            }
-
-            <Categories title="Tendencias">
-                <Carousel>
-                    {initialState.trends.map(item =>
-                        <CarouselItem key={item.id} {...item}/>
-                        )}
-                </Carousel>
-            </Categories>
-
-            <Categories title="Originales de PlayVideo">
-                <Carousel>
-                    {initialState.originals.map(item =>
-                        <CarouselItem key={item.id} {...item}/>
-                        )}
-                </Carousel>
-            </Categories>
+            {categories.map(category => (
+                videos[category].length > 0 &&
+                    <Categories title={UpperCaseFirstCase(category)}>
+                        <Carousel>
+                        {videos.trends.map(item =>
+                            <CarouselItem key={item.id} {...item}/>
+                            )}
+                    </Carousel>
+                    </Categories>
+                
+            ))}
 
             <Footer />
         </div>
