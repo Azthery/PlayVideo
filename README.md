@@ -771,3 +771,46 @@ En donde podremos iterar cada uno de los elementos de `videos.trends` el cual se
 
 ____________________________________________________________________________
 
+## **Custom Hooks**
+
+React nos permite crear nuestros **propios** Hooks. Solo debemos seguir algunas convenciones:
+
+1. Los hooks siempre deben empezar con la palabra **use**: `useAPI`, `useMovies`, `useWhatever`.
+2. Si nuestro custom hook nos permite consumir/interactuar con dos elementos (por ejemplo, title y setTitle), nuestro hook debe devolver un array.
+3. Si nuestro custom hook nos permite consumir/interactuar con tres o más elementos (por ejemplo, name, setName, lastName, setLastName, etc.), Nuestro hook debe devolver un objeto.
+
+Para crear nuestro **custom hook** solo debemos de integrarlo en una nueva carpeta en **src** denominada **hooks**, tal que `./src/hooks/`
+
+Una vez dentro integraremos el archivo, usndo siempre la **convension 1**, este debe de tener como base siempre:
+> A menos que se necesite, este archivo puede ser tranquilamente un `.js`
+```js
+const useCustomHook = () =>{
+  //logica
+  return ( );
+}
+
+export default useCustomHook;
+```
+
+Como ejemplo podemos ver nuestro custom hook del proyecto:
+```js
+import { useState, useEffect } from 'react';
+
+const useInitialState = (API) => {
+    const [videos, setVideos] = useState({ 
+        mylist: [],
+        trends: [],
+        originals: []
+        });
+    
+    useEffect(() => {
+        fetch(API)
+            .then(response => response.json())
+            .then(data => setVideos(data));
+    }, []);
+    return videos;
+}
+
+export default useInitialState;
+```
+____________________________________________________________________________
