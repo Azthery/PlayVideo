@@ -814,3 +814,56 @@ const useInitialState = (API) => {
 export default useInitialState;
 ```
 ____________________________________________________________________________
+
+## **PropTypes**
+
+Los PropTypes son una propiedad de nuestros componentes que nos permiten especificar qué **tipo de elementos** son nuestras **props**: arrays, strings, números, etc.
+Practicamente nos permite typar el las variables como si fuera `TypeScript`, pero enfocado a nuestro componentes como etiquetas de html, con una sisntaxis diferente.
+
+Se instala con el siguiente comando:
+```zsh
+npm install --save prop-types
+```
+
+Para usarla debemos de importarla en nuestro archivo
+```js
+import PropTypes from 'prop-types';
+```
+Y para hacerle uso, tenemos el siguiente ejemplo:
+```js
+const Component = { name, lastName, age, list }
+
+Component.propTypes = {
+  name: PropTypes.string,
+  lastName: PropTypes.string,
+  age: PropTypes.number,
+  list: PropTypes.array,
+};
+```
+
+Por defecto, enviar todas nuestras props es opcional, pero con los propTypes podemos especificar cuáles props son obligatorias para que nuestro componente funcione correctamente con el atributo isRequired.
+```js
+Component.propTypes = {
+  name: PropTypes.string.isRequired,      // obligatorio
+  lastName: PropTypes.string.isRequired,  // obligatorio
+  age: PropTypes.number,                  // opcional,
+  list: PropTypes.array,                  // opcional
+};
+```
+
+____________________________________________________________________________
+
+## **React Dev Tools**
+
+Esta es una herramiente increiblemente util a la hora de desarrollo, la cual nos permitira inspecionar nuestra aplicacion en react de una forma correcta.
+
+Si no la tenemos instalada en nuestero navegar, podemos encontrarla muy facil.
+Solo debemos de:
+1. Ir a al inspector de elemento en la pestaña de nuestra app en react con `Ctrl + Shift + C`.
+2. Seleccionar en la interfaz de la parte superior `Console`.
+3. El primer mensaje nos dara un link hacia la pagina de React donde nos recomienda descargar una extension para nuestro navegar.
+4. Sellecionamos nuestro navegador.
+5. Instalamos la extension.
+6. Reiniciamos nuestro navegar
+7. Abrimos nuestro inspector de elemento con `Ctrl + Shift + C` y la interfaz superior debemos de buscar l opcion `Components` que tiene el icono de React.
+

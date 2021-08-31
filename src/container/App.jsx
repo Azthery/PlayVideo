@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 
 import Header from '../components/Header';
 import Search from '../components/Search';
@@ -47,6 +48,13 @@ const App = () => {
             <Footer />
         </div>
     )
+};
+
+CarouselItem.propTypes = {
+    name: PropTypes.string,
+    lastName: PropTypes.string,
+    age: PropTypes.number,
+    list: PropTypes.array,
 };
 
 export default App;
